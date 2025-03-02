@@ -24,7 +24,9 @@ export const createEvent = catchAsyncError(
 export const getAllEvents = catchAsyncError(
   async (req: Request, res: Response) => {
     const events = await eventModel.find({ createdBy: req?.user?._id });
-
+     if(!events){
+        return new ErrorHandler("No events found", 404);
+     }
     res.json({
       success: true,
       data: events,
@@ -38,10 +40,7 @@ export const getEventById = catchAsyncError(
     const event = await eventModel.findById(req.params.id);
 
     if (!event) {
-      return res.status(404).json({
-        success: false,
-        message: "Event not found",
-      });
+     return new ErrorHandler("Event not found", 404);
     }
 
     res.json({
@@ -61,10 +60,7 @@ export const updateEventById = catchAsyncError(
     );
 
     if (!updatedEvent) {
-      return res.status(404).json({
-        success: false,
-        message: "Event not found",
-      });
+        return new ErrorHandler("Event not found", 404);
     }
 
     res.json({
@@ -80,10 +76,7 @@ export const deleteEventById = catchAsyncError(
     const deletedEvent = await eventModel.findByIdAndDelete(req.params.id);
 
     if (!deletedEvent) {
-      return res.status(404).json({
-        success: false,
-        message: "Event not found",
-      });
+        return new ErrorHandler("Event not found", 404);
     }
 
     res.json({
@@ -92,4 +85,3 @@ export const deleteEventById = catchAsyncError(
     });
   }
 );
-
