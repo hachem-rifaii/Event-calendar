@@ -50,7 +50,7 @@ const LoginPage = () => {
         <h2 className="mb-6 text-center text-2xl font-semibold text-gray-700">Login</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email Input */}
+          
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-600">Email</label>
             <input
