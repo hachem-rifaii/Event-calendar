@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { ErrorMiddleware } from "./src/middleware/error";
 import userRouter from "./src/routes/user.routes";
+import eventRouter from "./src/routes/event.routes";
 require("dotenv").config();
 
 // body parser
@@ -21,6 +22,8 @@ app.use(
 
 // routes
 app.use("/api/users" , userRouter)
+app.use("/api/events" , eventRouter)
+
 
 // unkown route
 app.all("*", (req: Request, res: Response, next: NextFunction) => {

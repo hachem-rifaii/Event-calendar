@@ -21,6 +21,6 @@ const eventSchema = new Schema<IEvent> ({
     updatedAt: { type: Date },
 })
 
-const Event: Model<IEvent> = mongoose.model<IEvent>("Event", eventSchema);
+const eventModel: Model<IEvent> = mongoose.model<IEvent>("Event", eventSchema);
 
-export default Event;
+export default eventModel;
