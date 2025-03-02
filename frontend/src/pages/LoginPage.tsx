@@ -76,7 +76,7 @@ const LoginPage = () => {
             {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
           </div>
 
-          {/* Submit Button */}
+        
           <button
             type="submit"
             disabled={isLoading}
