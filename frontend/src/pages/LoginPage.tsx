@@ -31,7 +31,7 @@ const LoginPage = () => {
       const response = await axios.post('http://localhost:5003/api/users/login', { email, password });
 
 
-      console.log("Login successful:", response.data);
+      console.log("Login successful", response.data);
     } catch (error) {
 
       if (axios.isAxiosError(error) && error.response) {
