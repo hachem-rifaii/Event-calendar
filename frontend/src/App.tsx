@@ -6,6 +6,7 @@ import { AppProvider } from "./context/AppContext";
 import ProtectedRoute from './routes/ProtectedRoute';
 import DemoApp from "./calendare";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
         <Router>
            <Routes>
            <Route path="/login" element={<LoginPage />} />
+           <Route path="/register" element={<RegisterPage />} />
         <Route
             path="/"
             element={
