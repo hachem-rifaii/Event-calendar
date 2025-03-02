@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5003/api/users/registration", {
+      const responses = await axios.post("http://localhost:5003/api/users/registration", {
         name,
         email,
         password,
