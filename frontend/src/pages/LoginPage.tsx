@@ -1,6 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import {  useNavigate } from "react-router-dom";
+=======
+import { Router, useNavigate } from "react-router-dom";
+>>>>>>> Hachem
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
 
@@ -13,8 +17,16 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   
  const {fetchUser} = useAppContext()
+=======
+  const { user , fetchUser } = useAppContext();
+  if (user) {
+    navigate("/");
+    return null;
+  }
+>>>>>>> Hachem
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -31,14 +43,28 @@ const LoginPage = () => {
       setErrors(newErrors);
       return;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Hachem
     setIsLoading(true);
 
     try {
       const response = await axios
+<<<<<<< HEAD
         .post("http://localhost:5003/api/users/login", { email, password },{
           withCredentials: true,
         })
+=======
+        .post(
+          "http://localhost:5003/api/users/login",
+          { email, password },
+          {
+            withCredentials: true,
+          }
+        )
+>>>>>>> Hachem
         .then((res) => {
           toast.success(res.data.message);
           console.log(res.data.message);

@@ -23,15 +23,14 @@ const DemoApp = () => {
     setOpen(true);
   };
 
-  const {user} = useAppContext()
   const handleSubmit = () => {
     setEvents([...events, newEvent]);
     setOpen(false);
   };
-
+const {user} = useAppContext()
   return (
     <div className="p-5">
-      <h1 className="text-3xl font-bold mb-5">Hello {user?.name} 👋</h1>
+      <h1 className="text-3xl font-bold mb-5">Hi {user?.name} 👋 </h1>
       <h1 className="text-2xl font-bold mb-5">Event Calendar</h1>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
