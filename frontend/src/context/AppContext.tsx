@@ -36,21 +36,23 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axiosInstance.get("/api/users/me");
-      setUser(data);
-    } catch (error) {
-      console.error("Failed to fetch user:", error);
+      const res = await axiosInstance.get("/api/users/me");
+      setUser(res.data.user);
+    } catch (err) {
+      setUser(null);
+      console.error("Failed to fetch user:", err);
     }
   };
-
+  
   const fetchEvents = async () => {
     try {
-      const { data } = await axiosInstance.get("/api/events");
-      setEvents(data);
-    } catch (error) {
-      console.error("Failed to fetch events:", error);
+      const res = await axiosInstance.get("/api/events");
+      setEvents(res.data.data);
+    } catch (err) {
+      console.error("Failed to fetch events:", err);
     }
   };
+  
 
   useEffect(() => {
     fetchUser();

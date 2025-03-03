@@ -13,8 +13,11 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  
- const {fetchUser} = useAppContext()
+  const { user , fetchUser } = useAppContext();
+  if (user) {
+    navigate("/");
+    return null;
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -31,14 +34,18 @@ const LoginPage = () => {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsLoading(true);
 
     try {
       const response = await axios
-        .post("http://localhost:5003/api/users/login", { email, password },{
-          withCredentials: true,
-        })
+        .post(
+          "http://localhost:5003/api/users/login",
+          { email, password },
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           toast.success(res.data.message);
           console.log(res.data.message);
