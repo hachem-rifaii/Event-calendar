@@ -61,6 +61,11 @@ export const loginUser = catchAsyncError(
         return next(new ErrorHandler("Invalid email or password", 401));
       }
       sendToken(user, 200, res);
+      res.status(200).json({
+        success: true,
+        user: user,
+        message: "User logged in successfully",
+      });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
     }

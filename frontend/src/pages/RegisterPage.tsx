@@ -1,13 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 
 const RegisterPage = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+const navigate = useNavigate();
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -17,9 +20,11 @@ const RegisterPage = () => {
         password,
       }).then((res) => {
         toast.success("success!");
+        navigate("/")
       }).catch((error) => {
         toast.error(error?.response?.data?.message);
         console.error("Error:", error);
+        
       });
    
     } catch (error) {
