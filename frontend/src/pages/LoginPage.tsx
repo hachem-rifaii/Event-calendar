@@ -36,24 +36,35 @@ const LoginPage = () => {
     }
     setIsLoading(true);
 
- 
     try {
-      const res = await axios.post(
-        "https://event-calendar-backend.vercel.app/api/users/login",
-        { email, password },
-        { withCredentials: true }
-      );
-      toast.success(res.data.message);
-      fetchUser();
-      navigate("/");
-    } catch (error : any) {
-      const errorMessage = error?.response?.data?.message || "Login failed, please try again.";
-      toast.error(errorMessage);
-      console.error("Error", errorMessage);
+      await axios
+        .post(
+          "https://event-calendar-backend.vercel.app/api/users/login",
+          { email, password },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          console.log(res.data.message);
+          fetchUser();
+          navigate("/");
+          // navigate("/");
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
+          console.error("Error", error);
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.error("Login error:", error.response.data);
+      } else {
+        console.error("Unexpected error:", error);
+      }
     } finally {
       setIsLoading(false);
     }
-  };
   };
 
   return (
@@ -108,7 +119,7 @@ const LoginPage = () => {
         {/* Signup Link */}
         <p className="mt-4 text-center text-sm text-gray-600">
           Don't have an account?{" "}
-          <Link to={"/register"} className="text-blue-500 hover:underline">
+          <Link to={"/register"}>
         
             Sign up
        
