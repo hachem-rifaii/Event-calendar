@@ -54,7 +54,8 @@ export const loginUser = catchAsyncError(
       if (!email || !password) {
         return next(new ErrorHandler("Please provide email and password", 400));
       }
-      const user = await userModel.findOne({ email }).select("+password");
+      const user = await userModel.findOne({ email }).select("+password")
+      console.log("get user ");
       if (!user) {
         console.log("User not found");
         return next(new ErrorHandler("Invalid email or password", 401));
