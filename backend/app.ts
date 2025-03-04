@@ -15,10 +15,11 @@ app.use(cookieParser());
 
 // cors => cross origin resource sharing
 app.use(cors({
-  origin: ['https://event-calendar-6fx6.vercel.app'],
+  origin: ['https://event-calendar-iota-six.vercel.app'],
   methods: 'GET,POST,PUT,DELETE',
   credentials: true, 
 }));
+app.options('*', cors());
 
 
 // routes
