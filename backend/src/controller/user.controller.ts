@@ -65,7 +65,7 @@ export const loginUser = catchAsyncError(
       if (!isPasswordMatch) {
         return next(new ErrorHandler("Invalid email or password", 401));
       }
-      sendToken(user, 200, res);
+      const accessToken = 
       console.log("User found, sending response");
    
     } catch (error: any) {
