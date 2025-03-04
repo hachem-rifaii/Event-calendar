@@ -12,42 +12,22 @@ app.use(express.json({ limit: "50mb" }));
 
 // cookie parser
 app.use(cookieParser());
-
-// CORS configuration
+// app.options("*", cors());
 app.use(
   cors({
     origin: "https://event-calendar-iota-six.vercel.app",
-    credentials: true,
+    credentials : true,
   })
 );
 
 // home route
-app.use("/test", (req, res) => {
-  res.send("helo from e-shop");
+app.use("/", (req, res) => {
+  res.send("helo from Event calendar");
 });
 
-// Add asynchronous handling for long-running operations
+// routes
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
-
-// Example of an async route for a heavy operation
-app.post("/api/long-operation", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await performHeavyTask(); // Assume this is a time-consuming task
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Dummy async function for long-running task simulation
-async function performHeavyTask() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("Task completed");
-    }, 5000); // Simulate a task taking 5 seconds
-  });
-}
 
 // unknown route handler
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
