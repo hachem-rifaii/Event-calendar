@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import userModel, { IUser } from "../model/user.model";
 import ErrorHandler from "../utils/ErrorHandler";
 import { catchAsyncError } from "../middleware/catchAsyncErrors";
-import jwt, { JwtPayload, Secret } from "jsonwebtoken";
+import jwt, { JwtPayload,  } from "jsonwebtoken";
 import {
   sendToken,
   accessTokenOptions,
