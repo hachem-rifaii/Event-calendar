@@ -15,7 +15,7 @@ const RegisterPage = () => {
     try {
       await axios
         .post(
-          "https://event-calendar-inky.vercel.app/api/users/registration",
+          "https://event-calendar-backend.vercel.app/api/users/registration",
           {
             name,
             email,

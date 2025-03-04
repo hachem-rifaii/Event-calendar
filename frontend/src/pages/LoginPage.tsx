@@ -39,7 +39,7 @@ const LoginPage = () => {
     try {
       await axios
         .post(
-          "https://event-calendar-inky.vercel.app/api/users/login",
+          "https://event-calendar-backend.vercel.app/api/users/login",
           { email, password },
           {
             withCredentials: true,
