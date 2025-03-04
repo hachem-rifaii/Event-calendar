@@ -12,16 +12,17 @@ app.use(express.json({ limit: "50mb" }));
 
 // cookie parser
 app.use(cookieParser());
-app.options("*", cors());
+// app.options("*", cors());
 app.use(
   cors({
     origin: "https://event-calendar-iota-six.vercel.app",
+    credentials : true,
   })
 );
 
 // home route
-app.get("/", (req, res) => {
-  res.send("API is running");
+app.use("/test", (req, res) => {
+  res.send("helo from e-shop");
 });
 
 // routes
