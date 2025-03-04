@@ -21,14 +21,14 @@ app.use(
 );
 
 // home route
-app.use("/", (req, res) => {
-  res.send("helo from Event calendar");
-});
+
 
 // routes
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
-
+app.use("/", (req, res) => {
+  res.send("helo from Event calendar");
+});
 // unknown route handler
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
   res.status(404).send({
