@@ -3,22 +3,29 @@ import { Request, Response, NextFunction } from "express";
 import eventModel, { IEvent } from "../model/event.model";
 import ErrorHandler from "../utils/ErrorHandler";
 import { catchAsyncError } from "../middleware/catchAsyncErrors";
-import { ObjectId, Types } from "mongoose";
+// import { ObjectId, Types } from "mongoose";
 
 // create a new event
 export const createEvent = catchAsyncError(
   async (req: Request, res: Response) => {
-    const event: IEvent = new eventModel(req.body);
-    event.createdBy = req?.user?._id as Types.ObjectId;
+    const event: IEvent = new eventModel({
+      title: req.body.title,
+      start: req.body.start,
+      description: req.body.description,
+      color: req.body.color,
+      createdBy: req?.user?._id,  
+    });
 
     const newEvent = await event.save();
 
     res.status(201).json({
       success: true,
+      message: 'Event created successfully',
       data: newEvent,
     });
   }
 );
+
 
 // get all events
 export const getAllEvents = catchAsyncError(

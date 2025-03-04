@@ -8,15 +8,16 @@ import React, {
 import axiosInstance from "../utils/axiosInstance";
 
 interface User {
-  id: string;
+  _id: string;
   name: string;
   email: string;
 }
 
 interface Event {
-  id: string;
+  _id: string;
   title: string;
   start: string;
+  startDate: Date;
   description?: string;
   color?: string;
 }

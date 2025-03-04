@@ -1,9 +1,7 @@
-
-
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5003", 
+  baseURL: "http://localhost:5003",
   timeout: 10000,
   withCredentials: true,
 });
@@ -43,7 +41,7 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        await axiosInstance.post("/api/users/refresh");
+        await axiosInstance.get("/api/users/refresh");
         processQueue(null, true);
         isRefreshing = false;
         return axiosInstance(originalRequest);
