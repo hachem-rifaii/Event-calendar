@@ -8,24 +8,22 @@ import eventRouter from "./src/routes/event.routes";
 const app = express();
 
 // body parser
-app.use(express.json({ limit: "50mb" }));
 
-// cookie parser
 app.use(cookieParser());
-// app.options("*", cors());
+app.use(express.json());
+
 app.use(
   cors({
     origin: "https://event-calendar-iota-six.vercel.app",
-    credentials : true,
+    credentials: true,
   })
 );
-
-// home route
-
 
 // routes
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
+
+// home route
 app.use("/", (req, res) => {
   res.send("helo from Event calendar");
 });
