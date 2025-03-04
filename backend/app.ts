@@ -1,11 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
-export const app = express();
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { ErrorMiddleware } from "./src/middleware/error";
-import userRouter from "./src/routes/user.routes";
-import eventRouter from "./src/routes/event.routes";
-require("dotenv").config();
+import { ErrorMiddleware } from "../src/middleware/error";
+import userRouter from "../src/routes/user.routes";
+import eventRouter from "../src/routes/event.routes";
+
+const app = express();
 
 // body parser
 app.use(express.json({ limit: "50mb" }));
@@ -13,30 +13,34 @@ app.use(express.json({ limit: "50mb" }));
 // cookie parser
 app.use(cookieParser());
 
-// cors => cross origin resource sharing
+// cors configuration
 app.use(cors({
   origin: ['https://event-calendar-iota-six.vercel.app'],
-  methods: 'GET,POST,PUT,DELETE',
-  credentials: true, 
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
-app.options('*', cors());
 
+// home route
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 
 // routes
-app.use("/api/users" , userRouter)
-app.use("/api/events" , eventRouter)
-app.use("/", (req, res)=> {
-  res.send("API is running");
-})
+app.use("/api/users", userRouter);
+app.use("/api/events", eventRouter);
 
-// unkown route
+
+
+// unknown route handler
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
-  const err = new Error(`Route ${req.originalUrl} not found`) as any;
-  err.status = 404;
-  res.send({
+  res.status(404).send({
     message: "Route not found",
-    statusCode: err.status,
+    statusCode: 404,
   });
-  next(err);
 });
+
+// error handling middleware
 app.use(ErrorMiddleware);
+
+export default app;
