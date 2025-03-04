@@ -1,33 +1,39 @@
 import axios from "axios";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
-
 
 const RegisterPage = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
- await axios.post("http://localhost:5003/api/users/registration", {
-        name,
-        email,
-        password,
-      }).then((res) => {
-        toast.success("success!");
-        navigate("/")
-        console.log(res)
-      }).catch((error) => {
-        toast.error(error?.response?.data?.message);
-        console.error("Error:", error);
-        
-      });
-   
+      await axios
+        .post(
+          "https://event-calendar-inky.vercel.app/api/users/registration",
+          {
+            name,
+            email,
+            password,
+          },
+          {
+            withCredentials:true
+          }
+        )
+        .then((res) => {
+          toast.success("success!");
+          navigate("/");
+          console.log(res);
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
+          console.error("Error:", error);
+        });
     } catch (error) {
       console.error("Error:", error);
     }

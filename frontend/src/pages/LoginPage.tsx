@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
     try {
       await axios
         .post(
-          "http://localhost:5003/api/users/login",
+          "https://event-calendar-inky.vercel.app/api/users/login",
           { email, password },
           {
             withCredentials: true,
@@ -119,9 +119,11 @@ const LoginPage = () => {
         {/* Signup Link */}
         <p className="mt-4 text-center text-sm text-gray-600">
           Don't have an account?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link to={"/register"} className="text-blue-500 hover:underline">
+        
             Sign up
-          </a>
+       
+          </Link>
         </p>
       </div>
     </div>

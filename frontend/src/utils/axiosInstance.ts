@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5003",
+  baseURL: "https://event-calendar-inky.vercel.app",
   timeout: 10000,
   withCredentials: true,
 });
