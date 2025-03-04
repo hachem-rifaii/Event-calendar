@@ -24,7 +24,9 @@ app.use(cors({
 // routes
 app.use("/api/users" , userRouter)
 app.use("/api/events" , eventRouter)
-
+app.use("/", (req, res)=> {
+  res.send("API is running");
+})
 
 // unkown route
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
