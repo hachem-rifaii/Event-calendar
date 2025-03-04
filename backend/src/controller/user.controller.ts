@@ -47,6 +47,7 @@ interface ILoginRequest {
 }
 export const loginUser = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log("login running")
     try {
       const { email, password } = req.body as ILoginRequest;
       if (!email || !password) {
