@@ -49,21 +49,26 @@ export const loginUser = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     console.log("login running")
     try {
+      console.log("Before DB call");
       const { email, password } = req.body as ILoginRequest;
       if (!email || !password) {
         return next(new ErrorHandler("Please provide email and password", 400));
       }
       const user = await userModel.findOne({ email }).select("+password");
       if (!user) {
+        console.log("User not found");
         return next(new ErrorHandler("Invalid email or password", 401));
       }
+      console.log("After DB call");
       const isPasswordMatch = await user.comparePassword(password);
       if (!isPasswordMatch) {
         return next(new ErrorHandler("Invalid email or password", 401));
       }
       sendToken(user, 200, res);
+      console.log("User found, sending response");
    
     } catch (error: any) {
+      console.error("Error in login route:", error);
       return next(new ErrorHandler(error.message, 400));
     }
   }
