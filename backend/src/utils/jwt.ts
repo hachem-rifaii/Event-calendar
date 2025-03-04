@@ -34,11 +34,13 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
   const accessToken = user.signAccessToken();
   const refreshToken = user.signRefreshToken();
 
-  if(process.env.NODE_ENV === 'production'){
+  if (process.env.NODE_ENV === 'production') {
     accessTokenOptions.secure = true;
+    refreshTokenOptions.secure = true;
   }
   res.cookie("access_token", accessToken, accessTokenOptions);
   res.cookie("refresh_token", refreshToken, refreshTokenOptions);
+
 
   res.status(statusCode).json({
     success: true,
