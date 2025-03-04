@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
 
@@ -37,7 +37,7 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios
+      await axios
         .post(
           "http://localhost:5003/api/users/login",
           { email, password },

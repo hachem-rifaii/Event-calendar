@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import  { useEffect, useState, useCallback, useMemo } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -6,7 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { useAppContext } from "./context/AppContext";
 import axiosInstance from "./utils/axiosInstance";
 import { toast } from "react-toastify";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 
 const DemoApp = () => {
   const { events, fetchEvents } = useAppContext();
@@ -21,7 +21,7 @@ const DemoApp = () => {
   const { user } = useAppContext();
   const [filter, setFilter] = useState({ color: "", title: "" , date : ""});
 
-  const handleClose = useCallback((e) => {
+  const handleClose = useCallback((e :any) => {
     if (e.target.id === "close") {
       setOpen(false);
     }
@@ -31,7 +31,7 @@ const DemoApp = () => {
     fetchEvents();
   }, [fetchEvents]);
 
-  const handleDateClick = (arg) => {
+  const handleDateClick = (arg:any) => {
     setNewEvent({ ...newEvent, date: arg.dateStr });
     setOpen(true);
   };
@@ -63,7 +63,7 @@ const DemoApp = () => {
     }
   };
 
-  const handleEventClick = (clickInfo) => {
+  const handleEventClick = (clickInfo:any) => {
     const event = clickInfo.event;
     setNewEvent({
       title: event.title,

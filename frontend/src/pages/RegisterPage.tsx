@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { toast } from "react-toastify";
-import { useAppContext } from "../context/AppContext";
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -14,13 +14,14 @@ const navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const responses = await axios.post("http://localhost:5003/api/users/registration", {
+ await axios.post("http://localhost:5003/api/users/registration", {
         name,
         email,
         password,
       }).then((res) => {
         toast.success("success!");
         navigate("/")
+        console.log(res)
       }).catch((error) => {
         toast.error(error?.response?.data?.message);
         console.error("Error:", error);
