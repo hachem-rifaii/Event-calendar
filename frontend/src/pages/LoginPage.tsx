@@ -46,7 +46,7 @@ const LoginPage = () => {
       toast.success(res.data.message);
       fetchUser();
       navigate("/");
-    } catch (error) {
+    } catch (error : any) {
       const errorMessage = error?.response?.data?.message || "Login failed, please try again.";
       toast.error(errorMessage);
       console.error("Error", errorMessage);
