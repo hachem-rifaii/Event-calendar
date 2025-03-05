@@ -29,7 +29,7 @@ const DemoApp = () => {
 
   useEffect(() => {
     fetchEvents();
-  }, [fetchEvents]);
+  }, []);
 
   const handleDateClick = (arg:any) => {
     setNewEvent({ ...newEvent, date: arg.dateStr });
