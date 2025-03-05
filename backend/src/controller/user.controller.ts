@@ -103,12 +103,12 @@ export const updateAccessToken = catchAsyncError(
       }
 
       const accessToken = jwt.sign(
-        { id: decoded._id },
+        { id: decoded.id },
         process.env.ACCESS_TOKEN as string,
         { expiresIn: "5m" }
       );
       const refreshToken = jwt.sign(
-        { id: decoded._id },
+        { id: decoded.id },
         process.env.REFRESH_TOKEN as string,
         { expiresIn: "3d" }
       );
