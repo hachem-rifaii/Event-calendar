@@ -16,8 +16,11 @@ app.use(
   cors({
     origin: "https://event-calendar-iota-six.vercel.app",
     credentials: true,
+    methods: "GET, POST, PUT, DELETE, OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
   })
 );
+
 
 // routes
 app.use("/api/users", userRouter);
