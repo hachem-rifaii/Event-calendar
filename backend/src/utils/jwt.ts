@@ -32,17 +32,20 @@ export const refreshTokenOptions: ITokenOptions = {
 export const sendToken = (user: IUser, statusCode: number, res: Response) => {
   const accessToken = user.signAccessToken();
   const refreshToken = user.signRefreshToken();
-console.log("go to send token")
+  console.log("go to send token"); 
+  
   if (process.env.NODE_ENV === "production") {
     accessTokenOptions.secure = true;
     refreshTokenOptions.secure = true;
   }
   res.cookie("access_token", accessToken, accessTokenOptions);
   res.cookie("refresh_token", refreshToken, refreshTokenOptions);
-console.log("sending the token ")
+  console.log("sending the token");
+
   res.status(statusCode).json({
     success: true,
     user,
     accessToken,
   });
 };
+
