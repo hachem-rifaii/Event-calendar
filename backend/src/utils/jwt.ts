@@ -8,6 +8,7 @@ interface ITokenOptions {
   httpOnly: boolean;
   sameSite: "lax" | "strict" | "none" | undefined;
   secure?: boolean;
+  path : string
 }
 export const accessTokenExpire = parseInt(
   process.env.ACCESS_TOKEN_EXPIRATION || "300",
@@ -22,12 +23,15 @@ export const accessTokenOptions: ITokenOptions = {
   maxAge: accessTokenExpire * 60 * 60 * 1000,
   httpOnly: true,
   sameSite: "none",
+  path : '/'
 };
 export const refreshTokenOptions: ITokenOptions = {
   expires: new Date(Date.now() + refreshTokenExpire * 24 * 60 * 60 * 1000),
   maxAge: refreshTokenExpire * 24 * 60 * 60 * 1000,
   httpOnly: true,
   sameSite: "none",
+  path : '/'
+
 };
 export const sendToken = (user: IUser, statusCode: number, res: Response) => {
   const accessToken = user.signAccessToken();
