@@ -7,7 +7,7 @@ import eventRouter from "./src/routes/event.routes";
 
 const app = express();
 
-// body parser
+
 
 app.use(cookieParser());
 app.use(express.json());

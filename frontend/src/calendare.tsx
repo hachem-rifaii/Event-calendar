@@ -1,4 +1,4 @@
-import  { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -19,9 +19,9 @@ const DemoApp = () => {
   });
   const [eventIdToDelete, setEventIdToDelete] = useState(null);
   const { user } = useAppContext();
-  const [filter, setFilter] = useState({ color: "", title: "" , date : ""});
+  const [filter, setFilter] = useState({ color: "", title: "", date: "" });
 
-  const handleClose = useCallback((e :any) => {
+  const handleClose = useCallback((e: any) => {
     if (e.target.id === "close") {
       setOpen(false);
     }
@@ -31,7 +31,7 @@ const DemoApp = () => {
     fetchEvents();
   }, []);
 
-  const handleDateClick = (arg:any) => {
+  const handleDateClick = (arg: any) => {
     setNewEvent({ ...newEvent, date: arg.dateStr });
     setOpen(true);
   };
@@ -63,7 +63,7 @@ const DemoApp = () => {
     }
   };
 
-  const handleEventClick = (clickInfo:any) => {
+  const handleEventClick = (clickInfo: any) => {
     const event = clickInfo.event;
     setNewEvent({
       title: event.title,
@@ -86,7 +86,6 @@ const DemoApp = () => {
     }
   };
 
- 
   const memoizedEvents = useMemo(
     () =>
       events
@@ -97,8 +96,7 @@ const DemoApp = () => {
               ? event.title.toLowerCase().includes(filter.title.toLowerCase())
               : true) &&
             (filter.date
-              ? new Date(event.start).toISOString().slice(0, 10) ===
-                filter.date
+              ? new Date(event.start).toISOString().slice(0, 10) === filter.date
               : true)
         )
         .map((event) => ({
@@ -143,7 +141,7 @@ const DemoApp = () => {
             className="w-full p-2 mb-4 border rounded"
             placeholder="Search by title"
           />
-               <label className="block mb-2">Date</label>
+          <label className="block mb-2">Date</label>
           <input
             type="date"
             value={filter.date}

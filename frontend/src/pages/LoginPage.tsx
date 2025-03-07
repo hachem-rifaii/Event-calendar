@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
+import axiosInstance from "../utils/axiosInstance";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { user , fetchUser } = useAppContext();
+  const { user, fetchUser } = useAppContext();
   if (user) {
     navigate("/");
     return null;
@@ -37,20 +38,13 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      await axios
-        .post(
-          "https://event-calendar-backend.vercel.app/api/users/login",
-          { email, password },
-          {
-            withCredentials: true,
-          }
-        )
+      await axiosInstance
+        .post("/api/users/login", { email, password })
         .then((res) => {
           toast.success(res.data.message);
           console.log(res.data.message);
           fetchUser();
           navigate("/");
-          // navigate("/");
         })
         .catch((error) => {
           toast.error(error?.response?.data?.message);
@@ -118,12 +112,7 @@ const LoginPage = () => {
 
         {/* Signup Link */}
         <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{" "}
-          <Link to={"/register"}>
-        
-            Sign up
-       
-          </Link>
+          Don't have an account? <Link to={"/register"}>Sign up</Link>
         </p>
       </div>
     </div>

@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 
 const RegisterPage = () => {
   const [name, setname] = useState("");
@@ -13,18 +13,12 @@ const RegisterPage = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios
-        .post(
-          "https://event-calendar-backend.vercel.app/api/users/registration",
-          {
-            name,
-            email,
-            password,
-          },
-          {
-            withCredentials:true
-          }
-        )
+      await axiosInstance
+        .post("/api/users/registration", {
+          name,
+          email,
+          password,
+        })
         .then((res) => {
           toast.success("success!");
           navigate("/");
